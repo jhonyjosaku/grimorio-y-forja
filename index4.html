@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grimorio y Forja | Impresión 3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #121c2b;
+            --shield-bg: #1e3047;
+            --gold: #cfa858;
+            --gold-light: #ebd088;
+            --steel: #a6b2ba;
+            --magic-blue: #63dcf2;
+            --text-light: #e0e6ed;
+            --whatsapp-green: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background-color: var(--shield-bg);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--magic-blue);
+        }
+
+        /* --- HERO SECTION (CON LOGO CENTRADO Y MÁS GRANDE) --- */
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(rgba(18, 28, 43, 0.9), rgba(18, 28, 43, 0.9)), url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            border-bottom: 2px solid var(--steel);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Estilos para el logo principal en grande */
+        .hero-logo {
+            height: 180px; /* Tamaño más grande y visible */
+            width: auto;
+            border-radius: 12px;
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 25px rgba(207, 168, 88, 0.6); /* Resplandor dorado más intenso */
+            margin-bottom: 1.5rem; /* Espacio antes del título */
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gold-light);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            color: var(--steel);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--bg-color);
+            padding: 0.8rem 2rem;
+            font-family: 'Cinzel', serif;
+            font-weight: 800;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 2px solid var(--gold-light);
+            transition: all 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--bg-color);
+            color: var(--gold);
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+        .btn-magic {
+            background-color: transparent;
+            color: var(--magic-blue);
+            border-color: var(--magic-blue);
+        }
+
+        .btn-magic:hover {
+            background-color: var(--magic-blue);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px var(--magic-blue);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp-green);
+            color: white;
+            border-color: #128C7E;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+            color: white;
+            box-shadow: 0 0 15px var(--whatsapp-green);
+        }
+
+        /* --- TIENDA SECTION (MANTIENE LA SIMETRÍA DE 3 COLUMNAS) --- */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 4rem 0 2rem 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            padding: 0 5%;
+        }
+
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        .product-card {
+            background-color: var(--shield-bg);
+            border: 1px solid var(--steel);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            background-color: #0d1520;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--steel);
+            border: 1px dashed var(--steel);
+        }
+
+        .product-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .price {
+            color: var(--magic-blue);
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* --- FORMULARIO PERSONALIZADO --- */
+        .custom-orders {
+            background-color: var(--shield-bg);
+            padding: 4rem 5%;
+            margin-top: 4rem;
+            border-top: 3px solid var(--gold);
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--bg-color);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--gold);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #0d1520;
+            border: 1px solid var(--steel);
+            color: white;
+            border-radius: 4px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--magic-blue);
+            box-shadow: 0 0 5px var(--magic-blue);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #0a1019;
+            color: var(--steel);
+            margin-top: 0;
+            border-top: 1px solid var(--steel);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Grimorio y Forja</div>
+        <nav>
+            <a href="#tienda">La Tienda</a>
+            <a href="#personalizados">La Forja</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <img src="WhatsApp Image 2026-05-21 at 13.48.56.jpeg" alt="Logo Grimorio y Forja" class="hero-logo">
+        <h1>Tus ideas, forjadas en la realidad</h1>
+        <p>Especialistas en impresión 3D FDM de alta resistencia y Resina con nivel de detalle absoluto para miniaturas y coleccionables.</p>
+        <div class="hero-buttons">
+            <a href="#tienda" class="btn">Ver Catálogo</a>
+            <a href="#personalizados" class="btn btn-magic">Solicitar Cotización</a>
+        </div>
+    </section>
+
+    <section id="tienda">
+        <h2 class="section-title">Grimorio de Productos</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div>
+                    <div class="product-img">[Foto Producto 1]</div>
+                    <h3>Miniatura Héroe Paladín (Resina)</h3>
+                    <p>Alto detalle, escala 32mm. Perfecta para rol de mesa.</p>
+                </div>
+                <div>
+                    <span class="price">$150 MXN</span>
+                    <a href="https://wa.me/523312345678?text=Hola,%20me%20interesa%20comprar%20la%20Miniatura%20Héroe%20Paladín%20(Resina)%20por%20$150%20MXN." target="_blank" class="btn btn-whatsapp">Pedir por WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-img">[Foto Producto 2]</div>
+                    <h3>Torre de Dados Castillo (FDM)</h3>
+                    <p>Material resistente, ideal para tus noches de juego.</p>
+                </div>
+                <div>
+                    <span class="price">$450 MXN</span>
+                    <a href="https://wa.me/523312345678?text=Hola,%20me%20interesa%20comprar%20la%20Torre%20de%20Dados%20Castillo%20(FDM)%20por%20$450%20MXN." target="_blank" class="btn btn-whatsapp">Pedir por WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-img">[Foto Producto 3]</div>
+                    <h3>Soporte para Controles (FDM)</h3>
+                    <p>Diseño gamer para organizar tu zona de juego.</p>
+                </div>
+                <div>
+                    <span class="price">$200 MXN</span>
+                    <a href="https://wa.me/523312345678?text=Hola,%20me%20interesa%20comprar%20el%20Soporte%20para%20Controles%20(FDM)%20por%20$200%20MXN." target="_blank" class="btn btn-whatsapp">Pedir por WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-img">[Foto Producto 4]</div>
+                    <h3>Dragón Articulado (FDM)</h3>
+                    <p>Figura flexible impresa en filamento premium brillante.</p>
+                </div>
+                <div>
+                    <span class="price">$300 MXN</span>
+                    <a href="https://wa.me/523312345678?text=Hola,%20me%20interesa%20comprar%20el%20Dragón%20Articulado%20(FDM)%20por%20$300%20MXN." target="_blank" class="btn btn-whatsapp">Pedir por WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-img">[Foto Producto 5]</div>
+                    <h3>Busto de Criatura Mítica (Resina)</h3>
+                    <p>Escultura detallada coleccionable lista para pintar.</p>
+                </div>
+                <div>
+                    <span class="price">$650 MXN</span>
+                    <a href="https://wa.me/523312345678?text=Hola,%20me%20interesa%20comprar%20el%20Busto%20de%20Criatura%20Mítica%20(Resina)%20por%20$650%20MXN." target="_blank" class="btn btn-whatsapp">Pedir por WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-img">[Foto Producto 6]</div>
+                    <h3>Réplica de Espada / Prop (FDM)</h3>
+                    <p>Pieza de gran tamaño ideal para cosplay o exhibición.</p>
+                </div>
+                <div>
+                    <span class="price">$1,200 MXN</span>
+                    <a href="https://wa.me/523312345678?text=Hola,%20me%20interesa%20comprar%20la%20Réplica%20de%20Espada%20/%20Prop%20(FDM)%20por%20$1,200%20MXN." target="_blank" class="btn btn-whatsapp">Pedir por WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="personalizados" class="custom-orders">
+        <h2 class="section-title">La Forja: Pedidos Personalizados</h2>
+        <div class="form-container">
+            <p style="text-align: center; margin-bottom: 1.5rem;">¿Tienes un modelo .STL o una idea en mente? Llena el formulario y te enviaremos la cotización por WhatsApp.</p>
+            
+            <form onsubmit="enviarCotizacionWhatsApp(event)">
+                <div class="form-group">
+                    <label for="nombre">Nombre o Apodo de Aventurero</label>
+                    <input type="text" id="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="material">Material de Preferencia</label>
+                    <select id="material">
+                        <option value="Resina">Resina (Máximo detalle, miniaturas)</option>
+                        <option value="PLA">PLA (FDM - Uso general, props)</option>
+                        <option value="PETG">PETG (FDM - Alta resistencia)</option>
+                        <option value="ABS+">ABS+ (FDM - Resistencia a temperatura y golpes)</option>
+                        <option value="No estoy seguro">No estoy seguro, necesito asesoría</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="enlace">Enlace a tu modelo (Thingiverse, Printables, etc.)</label>
+                    <input type="text" id="enlace" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label for="detalles">Describe tu proyecto</label>
+                    <textarea id="detalles" rows="4" placeholder="Tamaño aproximado, color, si requiere pintura..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-whatsapp" style="width: 100%; font-size: 1.1rem;">Enviar Detalles por WhatsApp</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <h3 style="margin-bottom: 1rem;">Grimorio y Forja</h3>
+        <p>Impresión 3D de alta calidad.</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">&copy; 2026 Grimorio y Forja. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function enviarCotizacionWhatsApp(event) {
+            event.preventDefault(); 
+
+            // *** RECUERDA CAMBIAR ESTE NÚMERO POR EL TUYO ***
+            const telefono = "523312345678"; 
+
+            const nombre = document.getElementById('nombre').value;
+            const material = document.getElementById('material').value;
+            const enlace = document.getElementById('enlace').value;
+            const detalles = document.getElementById('detalles').value;
+
+            let mensaje = `¡Hola! Vengo de la página web de Grimorio y Forja.%0A%0A`;
+            mensaje += `*Mi nombre es:* ${nombre}%0A`;
+            mensaje += `*Quiero cotizar una impresión:*%0A`;
+            mensaje += `*Material:* ${material}%0A`;
+            
+            if(enlace.trim() !== "") {
+                mensaje += `*Enlace del modelo:* ${enlace}%0A`;
+            }
+            
+            mensaje += `*Detalles del proyecto:* ${detalles}`;
+
+            const urlWhatsApp = `https://wa.me/${telefono}?text=${mensaje}`;
+            window.open(urlWhatsApp, '_blank');
+        }
+    </script>
+
+</body>
+</html>
